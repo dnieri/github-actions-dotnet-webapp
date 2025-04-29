@@ -3,34 +3,34 @@ name: .NET Build and Test
 on:
     push:
         branches:
-            - main # Executa o workflow em pushes para a branch "main"
+            - main
     pull_request:
         branches:
-            - main # Executa o workflow em pull requests para a branch "main"
+            - main
     schedule:
-        - cron: '0 * * * *' # Executa o workflow a cada hora
+        - cron: '0 * * * *'
 
 jobs:
     build:
-        runs-on: ubuntu-latest # Define o sistema operacional para o runner
+        runs-on: ubuntu-latest
 
         steps:
         - name: Checkout code
-          uses: actions/checkout@v3 # Faz o checkout do código do repositório
+          uses: actions/checkout@v3
 
         - name: Setup .NET
           uses: actions/setup-dotnet@v3
           with:
-              dotnet-version: '7.0.x' # Certifique-se de que esta versão é compatível com o projeto
+              dotnet-version: '7.0.x'
 
         - name: Restore dependencies
-          run: dotnet restore # Restaura as dependências do projeto
+          run: dotnet restore ./path/to/your/project_or_solution # Update the path to your project or solution file
 
         - name: Build project
-          run: dotnet build --no-restore --configuration Release # Compila o projeto no modo Release
+          run: dotnet build ./path/to/your/project_or_solution --no-restore --configuration Release # Update the path
 
         - name: Run tests
-          run: dotnet test --no-build --verbosity normal # Executa os testes com saída detalhada
+          run: dotnet test ./path/to/your/project_or_solution --no-build --verbosity normal # Update the path
 
         - name: Custom script - Check for TODO comments
           run: |
