@@ -18,14 +18,13 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v3
 
-        - name: Setup .NET
+        - name: Setup .NET 8.0 SDK
           uses: actions/setup-dotnet@v3
           with:
-              dotnet-version: '5.0.x'
+              dotnet-version: '8.0.x'
 
         - name: Restore dependencies
-          run: dotnet restore 
-          working-directory: ./github4women # Update the path to your project or solution file
+          run: dotnet restore /github4women/github4women.csproj # Update the path to your project or solution file
 
         - name: Build project
           run: dotnet build --no-restore --configuration Release
