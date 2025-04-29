@@ -25,6 +25,7 @@ jobs:
 
         - name: Restore dependencies
           run: dotnet restore # Restaura as dependências do projeto
+          working-directory: github-actions-dotnet-webapp/.github/workflows # Define o diretório de trabalho para o restore
 
         - name: Build project
           run: dotnet build --no-restore --configuration Release # Compila o projeto no modo Release
