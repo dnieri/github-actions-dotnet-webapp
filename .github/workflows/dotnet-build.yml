@@ -24,13 +24,16 @@ jobs:
               dotnet-version: '7.0.x'
 
         - name: Restore dependencies
-          run: dotnet restore ./github4women # Update the path to your project or solution file
+          run: dotnet restore 
+          working-directory: ./github4women # Update the path to your project or solution file
 
         - name: Build project
-          run: dotnet build ./github4women --no-restore --configuration Release # Update the path
+          run: dotnet build --no-restore --configuration Release
+          working-directory: ./github4womenen # Update the path
 
         - name: Run tests
-          run: dotnet test ./github4women --no-build --verbosity normal # Update the path
+          run: dotnet test --no-build --verbosity normal 
+          working-directory: ./github4womenen # Update the path
 
         - name: Custom script - Check for TODO comments
           run: |
