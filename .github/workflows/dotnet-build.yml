@@ -24,7 +24,7 @@ jobs:
               dotnet-version: '7.0.x'
 
         - name: Restore dependencies
-          run: dotnet restore ./path/to/your/project_or_solution # Update the path to your project or solution file
+          run: dotnet restore ./wwwroot # Update the path to your project or solution file
 
         - name: Build project
           run: dotnet build ./path/to/your/project_or_solution --no-restore --configuration Release # Update the path
