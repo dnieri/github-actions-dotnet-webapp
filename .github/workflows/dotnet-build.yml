@@ -24,8 +24,7 @@ jobs:
               dotnet-version: '7.0.x'
 
         - name: Restore dependencies
-          run: dotnet restore 
-          working-directory: ./github4women # Update the path to your project or solution file
+          run: dotnet restore ./github4women # Update the path to your project or solution file
 
         - name: Build project
           run: dotnet build ./github4women --no-restore --configuration Release # Update the path
