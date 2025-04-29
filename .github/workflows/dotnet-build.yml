@@ -1,4 +1,4 @@
-name: .NET Build and Test
+name: .NET Build
 
 on:
     push:
@@ -25,13 +25,13 @@ jobs:
 
         - name: Restore dependencies
           run: dotnet restore 
-          working-directory: ./wwwroot # Update the path to your project or solution file
+          working-directory: ./github4women # Update the path to your project or solution file
 
         - name: Build project
-          run: dotnet build ./path/to/your/project_or_solution --no-restore --configuration Release # Update the path
+          run: dotnet build ./github4women --no-restore --configuration Release # Update the path
 
         - name: Run tests
-          run: dotnet test ./path/to/your/project_or_solution --no-build --verbosity normal # Update the path
+          run: dotnet test ./github4women --no-build --verbosity normal # Update the path
 
         - name: Custom script - Check for TODO comments
           run: |
