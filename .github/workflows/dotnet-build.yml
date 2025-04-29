@@ -23,8 +23,14 @@ jobs:
           with:
               dotnet-version: '7.0.x' # Certifique-se de que esta versão é compatível com o projeto
 
+        - name: Restore dependencies
+          run: dotnet restore # Restaura as dependências do projeto
+
+        - name: Build project
+          run: dotnet build --no-restore --configuration Release # Compila o projeto no modo Release
+
         - name: Run tests
-           run: dotnet test --no-build --verbosity normal # Executa os testes com saída detalhada
+          run: dotnet test --no-build --verbosity normal # Executa os testes com saída detalhada
 
         - name: Custom script - Check for TODO comments
           run: |
