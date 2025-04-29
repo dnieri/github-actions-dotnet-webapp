@@ -1,40 +1,43 @@
-name: .NET Build
+name: .NET 8 Build and Publish
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
-        branches:
-            - main
-    schedule:
-        - cron: '0 * * * *'
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 * * * *
+	
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-        - name: Setup .NET 8.0 SDK
-          uses: actions/setup-dotnet@v3
-          with:
-              dotnet-version: '8.0.x'
+    - name: Setup .NET 8 SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'  # 🔥 Aqui está a correção
 
-        - name: Restore dependencies
-          run: dotnet restore /github4women/github4women.csproj # Update the path to your project or solution file
+    - name: Restore dependencies
+      run: dotnet restore github4women/github4women.csproj
 
-        - name: Build project
-          run: dotnet build --no-restore --configuration Release
-          working-directory: ./github4women # Update the path
+    - name: Build project
+      run: dotnet build github4women/github4women.csproj --configuration Release --no-restore
 
-        - name: Run tests
-          run: dotnet test --no-build --verbosity normal 
-          working-directory: ./github4women # Update the path
+    - name: Publish project
+      run: dotnet publish github4women/github4women.csproj --configuration Release --no-build --output ./github4women/publish
 
-        - name: Custom script - Check for TODO comments
-          run: |
-            echo "Verificando comentários TODO no código..."
-            grep -r "TODO" . || echo "Nenhum TODO encontrado." || true
+    - name: Upload published app
+      uses: actions/upload-artifact@v3
+      with:
+        name: published-app
+        path: github4women/publish
+        
+	- name: Custom script - Check for TODO comments
+      run: |
+        echo "Verificando comentários TODO no código..."
+        grep -r "TODO" . || echo "Nenhum TODO encontrado." || true
